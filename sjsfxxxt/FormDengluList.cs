@@ -21,12 +21,38 @@ namespace sjsfxxxt
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox1.Enabled = true;
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
+            if (dataGridView1.SelectedRows.Count <= 0)
+            {
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("是否删除所选数据？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(dr!= DialogResult.Yes)
+            {
+                return;
+            }
+
+            DataRowView rv = (dataGridView1.SelectedRows[0].DataBoundItem as DataRowView);
+
+            string sql = "delete from denglu where zh=@zh";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@zh",rv["zh"])
+            };
+            new SqlServerHelper().ExecuteSql(sql, parameters);
+
+            MessageBox.Show("删除登录用户成功");
+
+            button4_Click(null, null);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -51,6 +77,10 @@ namespace sjsfxxxt
             }
 
             string sql = "insert into denglu(zh,xm,mm)values(@zh,@xm,@mm)";
+            if (!textBox1.Enabled)
+            {
+                sql = "update denglu set xm=@xm,mm=@mm where zh=@zh";
+            }
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@zh",zh),
@@ -58,7 +88,14 @@ namespace sjsfxxxt
                 new SqlParameter("@mm",mm)
             };
             new SqlServerHelper().ExecuteSql(sql, parameters);
-            MessageBox.Show("新增登录用户成功");
+            if (textBox1.Enabled)
+            {
+                MessageBox.Show("新增登录用户成功");
+            }
+            else
+            {
+                MessageBox.Show("修改登录用户成功");
+            }
             button4_Click(null, null);
         }
 
@@ -68,14 +105,16 @@ namespace sjsfxxxt
             string sql = "select * from denglu where 1=1";
             if (!string.IsNullOrEmpty(zh))
             {
-                sql += " and zh='" + zh + "'";
+                sql += " and zh like'%" + zh + "%'";
             }
 
             DataTable table = new SqlServerHelper().QuerySqlDataTable(sql);
-
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = table;
-
+            if (table.Count() <=0)
+            {
+                button1_Click(null, null);
+            }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -84,6 +123,23 @@ namespace sjsfxxxt
             {
                 return;
             }
+
+            DataRowView rv = (dataGridView1.SelectedRows[0].DataBoundItem as DataRowView);
+            textBox1.Text = rv["zh"].AsString();
+            textBox2.Text = rv["xm"].AsString();
+            textBox3.Text = rv["mm"].AsString();
+
+            textBox1.Enabled = false;
+        }
+
+        private void FormDengluList_Load(object sender, EventArgs e)
+        {
+            button4_Click(null, null);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1_SelectionChanged(null, null);
         }
     }
 }

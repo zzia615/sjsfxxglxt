@@ -53,7 +53,7 @@ namespace sjsfxxxt
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Visible = true;
+            Application.Exit();
         }
     }
 }

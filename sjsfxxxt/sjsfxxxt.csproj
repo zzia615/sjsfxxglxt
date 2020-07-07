@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,18 @@
     </Compile>
     <Compile Include="FormChangePwd.Designer.cs">
       <DependentUpon>FormChangePwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShoujishoufeiQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShoujishoufeiQuery.Designer.cs">
+      <DependentUpon>FormShoujishoufeiQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShoujishoufeiList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShoujishoufeiList.Designer.cs">
+      <DependentUpon>FormShoujishoufeiList.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDengluList.cs">
       <SubType>Form</SubType>
@@ -76,6 +89,12 @@
     <EmbeddedResource Include="FormChangePwd.resx">
       <DependentUpon>FormChangePwd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormShoujishoufeiQuery.resx">
+      <DependentUpon>FormShoujishoufeiQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShoujishoufeiList.resx">
+      <DependentUpon>FormShoujishoufeiList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDengluList.resx">
       <DependentUpon>FormDengluList.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +113,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -21,5 +21,34 @@ namespace sjsfxxxt
             new FormChangePwd().ShowDialog();
         }
 
+        private void 用户信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDengluList form = new FormDengluList();
+            form.WindowState = FormWindowState.Maximized;
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void 手机信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormShoujishoufeiList form = new FormShoujishoufeiList();
+            form.WindowState = FormWindowState.Maximized;
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void 手机收费信息查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FormShoujishoufeiQuery form = new FormShoujishoufeiQuery();
+            form.WindowState = FormWindowState.Maximized;
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
