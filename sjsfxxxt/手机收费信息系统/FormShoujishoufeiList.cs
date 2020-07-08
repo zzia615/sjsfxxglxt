@@ -68,12 +68,12 @@ namespace sjsfxxxt
             int id = textBox3.Text.AsInt();
             if (string.IsNullOrEmpty(mc))
             {
-                MessageBox.Show("手机不能为空");
+                MessageBox.Show("手机号不能为空");
                 return;
             }
             if (string.IsNullOrEmpty(xh))
             {
-                MessageBox.Show("型号不能为空");
+                MessageBox.Show("机主不能为空");
                 return;
             }
         
